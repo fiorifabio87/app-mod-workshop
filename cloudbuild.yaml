@@ -55,7 +55,6 @@ steps:
       - '--quiet'
       # Note to self: non va col services..
       - '--allow-unauthenticated'
-    secretEnv: ['SECRET_MANAGER_DB_PASS']
     env: # https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values=
     # copying RAILS_ENV approach.
     - PHP_ENV=development
