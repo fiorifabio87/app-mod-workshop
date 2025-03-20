@@ -65,37 +65,6 @@ steps:
     - CODE_REPO="https://github.com/${_GITHUB_USER}/app-mod-workshop/"
     entrypoint: gcloud
 
-  # PROD copy
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
-    args:
-      - run
-      - deploy
-      - ${_SERVICE_NAME}-prod
-      - '--platform=managed'
-      - '--port=80'
-      - '--set-env-vars'
-      -   "DB_USER=$_DB_USER"
-      - '--set-env-vars'
-      -   "DB_HOST=$_DB_HOST"
-      - '--set-env-vars'
-      -   "DB_NAME=$_DB_NAME"
-      - '--set-secrets'
-      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/php-amarcord-db-pass/versions/latest"
-      - >-
-        --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
-      - '--region=$_DEPLOY_REGION'
-      - '--quiet'
-      - '--allow-unauthenticated'
-    env:
-    - PHP_ENV=production
-    - PORT=80
-    - APP_NAME="A PHP Amarcord app deployed via Cloud Build to PROD - please do not deploy on Fridays!"
-    - DEBUG="false"
-    - CODE_REPO="https://github.com/${_GITHUB_USER}/app-mod-workshop/"
-    id: Deploy to PROD version after DEV works
-    entrypoint: gcloud
-
-
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
@@ -113,9 +82,3 @@ substitutions:
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - php-amarcord
-availableSecrets:
-  secretManager:
-  # - versionName: projects/$PROJECT_ID/secrets/php-amarcord-db-pass/versions/latest
-  #   env: 'DB_PASS'
-  - versionName: projects/$PROJECT_ID/secrets/php-amarcord-db-pass/versions/latest
-    env: 'SECRET_MANAGER_DB_PASS'
