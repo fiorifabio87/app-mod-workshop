@@ -46,7 +46,7 @@ steps:
       -   "PHP_ENV=$_PHP_ENV"
       # This works
       - '--set-secrets'
-      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/php-amarcord-db-pass:latest" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
+      -   "DB_PASS=projects/319635566760/secrets/php-amarcord-db-pass/versions/1" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
       - >-
         --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - >-
