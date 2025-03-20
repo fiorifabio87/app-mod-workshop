@@ -110,6 +110,9 @@ substitutions:
   _EXECUTION_ENVIRONMENT: 'rgc/cloudbuild'
   _GITHUB_USER: fiorifabio87 # change your your own, eg 'gregorio'
   _PROJECT_NUMBER: "gdg-app-mod-workshop" # Change it with your own
+  _DB_USER: "username"
+  _DB_HOST: "34.56.192.15"
+  _DB_NAME: "image_catalog"
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - php-amarcord
